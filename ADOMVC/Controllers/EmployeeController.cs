@@ -6,19 +6,23 @@ namespace ADOMVC.Controllers
     public class EmployeeController : Controller
     {
         SqlConnection connection = null;
+         static IConfiguration _configuration; 
+        public EmployeeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         SqlCommand command = null;
 
         static string GetCOnnectionString()
         {
-            return @"data source=ANAMIKA\SQLSERVER;initial catalog=EmpDb;integrated security=true";
+            return _configuration.GetConnectionString("EmployeeDbCon").ToString();
+            //return @"data source=ANAMIKA\SQLSERVER;initial catalog=EmpDb;integrated security=true";
         }
         static SqlConnection GetConnection()
         {
             return new SqlConnection(GetCOnnectionString());
         }
-        public EmployeeController()
-        {
-        }
+         
         public IActionResult Index()
         {
             List<Employee> employees = new List<Employee>();

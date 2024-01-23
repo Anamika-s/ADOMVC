@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
 namespace ADOMVC
 {
     public class Program
@@ -5,10 +7,9 @@ namespace ADOMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            IConfiguration _config;
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
